@@ -8,7 +8,6 @@ import { HiMenu, HiX } from "react-icons/hi";
 import {
   FaChevronDown,
   FaRobot,
-  FaPlane,
   FaMotorcycle,
   FaBlog,
   FaUser,
@@ -22,9 +21,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -45,9 +42,9 @@ export default function Navbar() {
         scrolled ? "bg-white shadow-md text-black" : "text-white"
       }`}
     >
-      <div className="max-w-screen-2xl mx-auto px-4 py-4 flex justify-between items-center">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 z-50">
+      <div className="max-w-screen-2xl mx-auto px-4 md:px-6 lg:px-8 py-3 flex items-center justify-between">
+        {/* Left: Logo */}
+        <Link href="/" className="flex items-center gap-2 z-50 flex-shrink-0">
           <Image
             src={scrolled ? "/images/logo1.png" : "/images/logo.png"}
             alt="Logo"
@@ -57,68 +54,70 @@ export default function Navbar() {
           />
         </Link>
 
-        {/* Desktop: Submenu icons + main nav */}
-        <div className="hidden md:flex items-center flex-1 justify-end gap-8">
-          {/* Submenu icons */}
-          {scrolled && (
-            <div className="flex items-center gap-4">
-              {submenuItems.slice(0, 9).map((item, i) => (
-                <div
-                  key={i}
-                  className="flex flex-col items-center text-xs text-gray-700 hover:text-[#28b28e] transition cursor-pointer"
-                  title={item.label}
-                >
-                  <div className="text-lg">{item.icon}</div>
-                  <span>
-                    {item.label.length > 7
-                      ? `${item.label.slice(0, 7)}...`
-                      : item.label}
-                  </span>
-                </div>
-              ))}
-
-              <div className="relative group">
-                <div className="flex flex-col items-center text-xs text-gray-700 hover:text-[#28b28e] cursor-pointer">
-                  <FaChevronDown className="text-lg" />
-                  <span>More</span>
-                </div>
-                <div className="absolute top-10 left-0 bg-white border shadow-lg p-3 rounded-md hidden group-hover:block z-50">
-                  {submenuItems.slice(9).map((item, i) => (
-                    <div
-                      key={i}
-                      className="flex items-center gap-2 py-1 px-2 w-max hover:bg-gray-100 text-sm text-gray-800 cursor-pointer"
-                      title={item.label}
-                    >
-                      <div className="text-lg">{item.icon}</div>
-                      <span>
-                        {item.label.length > 7
-                          ? `${item.label.slice(0, 7)}...`
-                          : item.label}
-                      </span>
-                    </div>
-                  ))}
-                </div>
+        {/* Center: Submenu */}
+        {scrolled && (
+          <div className="hidden md:flex items-center gap-6 flex-grow justify-center flex-wrap">
+            {submenuItems.slice(0, 9).map((item, i) => (
+              <div
+                key={i}
+                className="flex flex-col items-center text-xs text-gray-700 hover:text-[#28b28e] transition cursor-pointer"
+                title={item.label}
+              >
+                <div className="text-lg">{item.icon}</div>
+                <span className="whitespace-nowrap">
+                  {item.label.length > 7
+                    ? `${item.label.slice(0, 7)}...`
+                    : item.label}
+                </span>
+              </div>
+            ))}
+            <div className="relative group">
+              <div className="flex flex-col items-center text-xs text-gray-700 hover:text-[#28b28e] cursor-pointer">
+                <FaChevronDown className="text-lg" />
+                <span>More</span>
+              </div>
+              <div className="absolute top-10 left-0 bg-white border shadow-lg p-3 rounded-md hidden group-hover:block z-50 min-w-[140px]">
+                {submenuItems.slice(9).map((item, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-2 py-1 px-2 w-full hover:bg-gray-100 text-sm text-gray-800 cursor-pointer"
+                  >
+                    <div className="text-lg">{item.icon}</div>
+                    <span>
+                      {item.label.length > 7
+                        ? `${item.label.slice(0, 7)}...`
+                        : item.label}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
-          )}
+          </div>
+        )}
 
-          {/* Main Nav Links - compact with icons */}
-          <div className="hidden md:flex space-x-6 font-medium text-sm">
-            {navLinks.map((link) => (
+        {/* Right: Main Nav */}
+        <div className="hidden md:flex items-center gap-6 font-medium text-sm flex-shrink-0">
+          {navLinks
+            .filter(
+              (link) =>
+                !scrolled ||
+                (link.label !== "Blogs" && link.label !== "Bike Rides")
+            )
+            .map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                className="flex items-center gap-1 group transition duration-300"
+                className="flex flex-col items-center gap-1 group transition duration-300"
               >
                 <span
-                  className={`text-base group-hover:text-[#FF6B6B] ${
+                  className={`text-base group-hover:text-[#FF6B6B] flex items-center justify-center ${
                     scrolled ? "text-gray-800" : "text-gray-200"
                   }`}
                 >
                   {link.icon}
                 </span>
                 <span
-                  className={`group-hover:text-[#FF6B6B] ${
+                  className={`text-xs group-hover:text-[#FF6B6B] ${
                     scrolled ? "text-gray-800" : "text-gray-200"
                   }`}
                 >
@@ -126,7 +125,6 @@ export default function Navbar() {
                 </span>
               </Link>
             ))}
-          </div>
         </div>
 
         {/* Mobile Hamburger */}
@@ -164,23 +162,24 @@ export default function Navbar() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="flex items-center gap-2 border-b border-white/10 pb-2 hover:text-[#FF6B6B] transition-colors duration-200"
+                className="flex items-center gap-3 border-b border-white/10 pb-2 hover:text-[#FF6B6B] transition-colors duration-200"
                 onClick={() => setIsOpen(false)}
               >
-                <span className="text-lg">{link.icon}</span>
+                <span className="text-lg flex items-center justify-center w-6">
+                  {link.icon}
+                </span>
                 {link.label}
               </Link>
             ))}
-
-            {/* Mobile Submenu */}
             <div className="pt-4 border-t border-white/10">
               {submenuItems.map((item, i) => (
                 <div
                   key={i}
-                  className="flex items-center gap-2 py-2 px-3 w-full hover:bg-gray-100 text-sm text-gray-800 cursor-pointer"
-                  title={item.label}
+                  className="flex items-center gap-3 py-2 px-3 w-full hover:bg-gray-100 text-sm text-gray-800 cursor-pointer"
                 >
-                  <div className="text-lg">{item.icon}</div>
+                  <div className="text-lg flex items-center justify-center w-6">
+                    {item.icon}
+                  </div>
                   <span>{item.label}</span>
                 </div>
               ))}

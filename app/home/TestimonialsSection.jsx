@@ -6,12 +6,12 @@ import { FaStar } from "react-icons/fa";
 
 const testimonials = [
   {
-    image: "/images/person_1.jpg",
-    name: "Sarah Johnson",
-    role: "Travel Blogger & Content Creator",
-    company: "Wanderlust Adventures",
+    image: "/images/testimonial_1.png",
+    name: "Rishiraj Ramaswamy",
+    role: "Local Guide",
+    company: "",
     quote:
-      "This platform has completely transformed how I plan and experience my travels. The sustainability focus and technology integration make every journey more meaningful and responsible.",
+      "I visited Hornbill, Nagaland with assistance from Travysys and it was a mind boggling trip, an adventure of a lifetime. The rich heritage of Khonoma and the assistance from Team Travysys was really amazing. Simply outstanding efforts by team Travysys.",
     rating: 5,
   },
   {
@@ -25,11 +25,11 @@ const testimonials = [
   },
   {
     image: "/images/person_3.jpg",
-    name: "Amina K.",
-    role: "Photographer",
-    company: "Nomad Lens",
+    name: "Rubica Singh",
+    role: "Local Guide",
+    company: "",
     quote:
-      "Beautiful interface and intuitive experience. I love the focus on eco-conscious travel!",
+      "The best travel company in North East India! Our tour package was an affordable and beautifully curated package with wonderful hotels and seamless transfers. Special thanks to Mr. Priyangshu who is an expert in this field. Will definitely book again for our next adventure, now that they have South East Asian countries (International) trips as well.",
     rating: 5,
   },
 ];
