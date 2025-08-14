@@ -70,7 +70,7 @@ export default function Hero() {
       )}
 
       {/* Center Content */}
-      <div className="relative z-20 flex flex-col items-center justify-center h-full px-4 sm:px-6 text-center max-w-3xl mx-auto">
+      <div className="relative z-20 flex flex-col items-center justify-center h-full px-4 sm:px-6 text-center max-w-3xl mx-auto mt-10">
         <motion.div
           className="mt-8 mb-6 flex gap-2 sm:gap-4 flex-wrap justify-center"
           initial={{ opacity: 0 }}
