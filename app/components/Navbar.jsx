@@ -40,7 +40,7 @@ export default function Navbar() {
   // ✅ Insert Forex card after "Book Flight" only when scrolled
   if (scrolled) {
     const forexCard = {
-      label: "Forex",
+      label: "Forex Card",
       href: "/forex",
       icon: <FaMoneyBillWave />,
     };
