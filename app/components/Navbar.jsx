@@ -12,6 +12,7 @@ import {
   FaBlog,
   FaUser,
   FaGlobe,
+  FaMoneyBillWave,
 } from "react-icons/fa";
 import { MdFlightTakeoff } from "react-icons/md";
 import { submenuItems } from "./constants";
@@ -26,7 +27,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
+  let navLinks = [
     { label: "Plan Trip AI", href: "/plan-trip-ai", icon: <FaRobot /> },
     { label: "Find Flight AI", href: "/find-flight-ai", icon: <FaRobot /> },
     { label: "Book Flight", href: "/book-flight", icon: <MdFlightTakeoff /> },
@@ -35,6 +36,18 @@ export default function Navbar() {
     { label: "Login", href: "/login", icon: <FaUser /> },
     { label: "Currency", href: "/currency-language", icon: <FaGlobe /> },
   ];
+
+  // ✅ Insert Forex card after "Book Flight" only when scrolled
+  if (scrolled) {
+    const forexCard = {
+      label: "Forex",
+      href: "/forex",
+      icon: <FaMoneyBillWave />,
+    };
+    const insertIndex =
+      navLinks.findIndex((link) => link.label === "Book Flight") + 1;
+    if (insertIndex > 0) navLinks.splice(insertIndex, 0, forexCard);
+  }
 
   return (
     <nav
